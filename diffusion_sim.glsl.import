@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://k15ej3ds2234"
+path="res://.godot/imported/diffusion_sim.glsl-8114ea08dff0cab5156169aba816424c.res"
+
+[deps]
+
+source_file="res://diffusion_sim.glsl"
+dest_files=["res://.godot/imported/diffusion_sim.glsl-8114ea08dff0cab5156169aba816424c.res"]
+
+[params]
+

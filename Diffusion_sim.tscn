@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsmaywije6kdn"]
+
+[ext_resource type="Script" uid="uid://cptbkb17prayg" path="res://diffusion_sim.gd" id="1_5h4n1"]
+[ext_resource type="Shader" uid="uid://t17vonjprmof" path="res://Diffusion_sim.gdshader" id="2_mgse6"]
+[ext_resource type="Shader" uid="uid://prob4wrt8otc" path="res://terrain_shader.gdshader" id="3_2c7a2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2c7a2"]
+render_priority = 0
+shader = ExtResource("2_mgse6")
+shader_parameter/passive_color = Vector4(0, 0, 0, 0)
+shader_parameter/active_color = Vector4(0, 0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2c7a2"]
+material = SubResource("ShaderMaterial_2c7a2")
+size = Vector2(1, 1)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="Environment" id="Environment_mgse6"]
+background_mode = 1
+background_color = Color(0.78616, 0.904126, 0.96299, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.82784, 0.79891, 1)
+ambient_light_energy = 8.24
+
+[sub_resource type="Gradient" id="Gradient_2c7a2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l2gng"]
+gradient = SubResource("Gradient_2c7a2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2gng"]
+render_priority = 0
+shader = ExtResource("3_2c7a2")
+shader_parameter/gradient = SubResource("GradientTexture2D_l2gng")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dhvqw"]
+material = SubResource("ShaderMaterial_l2gng")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufp7n"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_5h4n1")
+active_color = Color(0.457152, 0.43232, 0.195684, 1)
+passive_color = Color(0.205798, 0.161727, 0.570741, 1)
+
+[node name="ModelMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_2c7a2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.299107, 0.95422, 0, -0.95422, 0.299107, 0, 0.6, 0.31)
+fov = 86.3826
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 291.628, 908.03)
+light_energy = 20.0
+omni_range = 23.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mgse6")
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_dhvqw")
+surface_material_override/0 = SubResource("StandardMaterial3D_ufp7n")
