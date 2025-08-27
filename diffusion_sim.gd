@@ -30,7 +30,7 @@ var sim_array_uniform : RDUniform
 
 # initialize simulation parameters
 var SIM_SIZE : Vector2i
-var N_AV : int = 10
+var N_AV : int = 1
 
 var frame_count : int = 0
 var frame_skip : int = 0
@@ -48,15 +48,16 @@ func _ready():
 
 	geo_layer.convert(Image.FORMAT_RF)
 	SIM_SIZE = Vector2i(geo_layer.get_width(), geo_layer.get_height())
-	
 	var aspect_ratio = float(geo_layer.get_width())/float(geo_layer.get_height())
 	
 	$ModelMesh.mesh.size.x *= aspect_ratio
 	$ModelMesh.mesh.subdivide_width = SIM_SIZE.x / 2
 	$ModelMesh.mesh.subdivide_depth = SIM_SIZE.y / 2
 	$TerrainMesh.mesh.size.x *= aspect_ratio
-	$TerrainMesh.mesh.subdivide_width = SIM_SIZE.x / 2
-	$TerrainMesh.mesh.subdivide_depth = SIM_SIZE.y / 2
+	$TerrainMesh.mesh.subdivide_width = SIM_SIZE.x/2
+	$TerrainMesh.mesh.subdivide_depth = SIM_SIZE.y/2
+	#$TerrainMesh.position.y =- 0.00001;
+
 	
 	simulation_step = Image.create(SIM_SIZE.x, SIM_SIZE.y, false, Image.FORMAT_R8)
 
@@ -71,10 +72,10 @@ func _ready():
 	simulation_texture = ImageTexture.create_from_image(simulation_step)
 	geo_layer_texture = ImageTexture.create_from_image(geo_layer)
 	
-	var heightmap_file = load("res://Layers/heightmap.jpg") as Texture2D
+	var heightmap_file = load("res://Layers/heightmap.png") as Texture2D
+	#heightmap = Image.create(heightmap_file.get_width(),heightmap_file.get_height(), false, Image.FORMAT_R8)
 	heightmap = heightmap_file.get_image()
-	#heightmap = normalize_heightmap(heightmap)
-	heightmap.convert(Image.FORMAT_R8)
+
 	var cropped_img = crop_to_latlon_section(heightmap, lats, lons)
 	heightmap_texture = ImageTexture.create_from_image(cropped_img)
 	
@@ -212,7 +213,7 @@ func crop_to_latlon_section(img: Image, lats: Vector2, lons: Vector2) -> Image:
 	var sub_height = y1 - y0
 
 	# Create new image
-	var cropped = Image.create(sub_width, sub_height, false, img.get_format())
+	var cropped = Image.create(sub_width, sub_height, false, Image.FORMAT_R8)
 	#img.lock()
 	#cropped.lock()
 	for y in range(sub_height):

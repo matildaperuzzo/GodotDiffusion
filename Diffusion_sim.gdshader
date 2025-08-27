@@ -5,8 +5,9 @@ uniform vec4 passive_color;
 uniform vec4 active_color;
 
 void vertex() {
-	float height_range = 0.1;
-	float h = texture(height_layer, UV).r*height_range;
+	float height_range = .2;
+	float h = texture(height_layer, UV).r;
+	h = h * height_range;
 	VERTEX.y = h;
 	// Called for every vertex the material is visible on.
 }
@@ -18,7 +19,7 @@ void fragment() {
 	float height = texture(height_layer, UV).r;
 	float height_scale = 0.2;
 	float shading_factor = (height) * height_scale;
-	ALBEDO = mapped_color.rgb * shading_factor;
+	ALBEDO = mapped_color.rgb + vec3(shading_factor);
 	// Determine which pixels are at the edges
 	bool at_edge = (UV.x <= (1.0 / float(textureSize(texture_image, 0).x)) ||
 	                UV.x >= 1.0 - (1.0 / float(textureSize(texture_image, 0).x)) ||
@@ -29,9 +30,9 @@ void fragment() {
 	if (at_edge) {
 	    mapped_color.a = 0.0;
 	}
-	//ALPHA = mapped_color.a;
-	ALPHA = 0.;
-	RADIANCE = mapped_color;
+	
+	ALPHA = mapped_color.a;
+	//RADIANCE = mapped_color;
 
 }
 
