@@ -16,6 +16,9 @@ var params_uniform : RDUniform
 var heightmap : Image
 var heightmap_texture : ImageTexture
 
+var river_layer : Image
+var sea_layer : Image
+
 var geo_layer : Image
 var geo_layer_texture : ImageTexture
 var geo_texture_buffer : RID
@@ -30,7 +33,7 @@ var sim_array_uniform : RDUniform
 
 # initialize simulation parameters
 var SIM_SIZE : Vector2i
-var N_AV : int = 1
+var N_AV : int = 100
 
 var frame_count : int = 0
 var frame_skip : int = 0
@@ -44,10 +47,19 @@ var lons = Vector2(-20,90)
 func _ready():
 
 	geo_layer = Image.new()
-	geo_layer.load("res://Layers/GeoLayer.png")
-
+	var layer_filenames = ["res://Layers/sea.png","res://Layers/hydro.png"]
+	var heightmap_filename = "res://Layers/heightmap.png"
+	var theta = [-1.411, -1.116, 1.445]
+	
+	var layers = crop_to_latlon_section_multiple(layer_filenames, heightmap_filename, lats, lons)
+	heightmap = layers[layers.size() - 1]
+	var geo_layers : Array
+	for l in range(layers.size()-1):
+		geo_layers.append(layers[l])
+	geo_layer = create_geo_layer(geo_layers, theta)
+	SIM_SIZE = Vector2i(layers[0].get_width(), layers[0].get_height())
 	geo_layer.convert(Image.FORMAT_RF)
-	SIM_SIZE = Vector2i(geo_layer.get_width(), geo_layer.get_height())
+	
 	var aspect_ratio = float(geo_layer.get_width())/float(geo_layer.get_height())
 	
 	$ModelMesh.mesh.size.x *= aspect_ratio
@@ -223,3 +235,58 @@ func crop_to_latlon_section(img: Image, lats: Vector2, lons: Vector2) -> Image:
 	#img.unlock()
 	#cropped.unlock()
 	return cropped
+
+func crop_to_latlon_section_multiple(img_paths: Array, heightmap_path : String , lats: Vector2, lons: Vector2) -> Array:
+	var img : Array
+	var cropped : Array
+	
+	var img_length = img_paths.size()
+	for layer in range(img_length):
+		var path = img_paths[layer]
+		var tex = load(path) as Texture2D
+		if tex == null:
+			push_warning("Failed to load: %s:" %path)
+			continue
+		img.append(tex.get_image())
+	var heightmap_tex = load(heightmap_path) as Texture2D
+	if heightmap_tex == null:
+		push_warning("Failed to load: %s:" %heightmap_path)
+	img.append(heightmap_tex.get_image())
+		
+	var width = img[0].get_width()
+	var height = img[0].get_height()
+
+	# Convert lat/lon → pixel coords
+	var x0 = int(((lons.x + 180.0) / 360.0) * width)
+	var x1 = int(((lons.y + 180.0) / 360.0) * width)
+	var y0 = int(((90.0 - lats.y) / 180.0) * height)  # top
+	var y1 = int(((90.0 - lats.x) / 180.0) * height)  # bottom
+
+	var sub_width = x1 - x0
+	var sub_height = y1 - y0
+
+	# Create new image
+	for layer in range(img.size()):
+		cropped.append(Image.create(sub_width, sub_height, false, Image.FORMAT_R8))
+
+	for y in range(sub_height):
+		for x in range(sub_width):
+			for layer in range(img.size()):
+				var col =  img[layer].get_pixel(x + x0, y + y0)
+				cropped[layer].set_pixel(x,y,col)
+	return cropped
+	
+func create_geo_layer(layers : Array, thetas : Array) -> Image:
+	if layers.size() != thetas.size()-1:
+		push_error('Number of thetas must be img_paths.size() + 1')
+	var width = layers[0].get_width()
+	var height = layers[0].get_height()
+	var geolayer = Image.create(width,height,false,Image.FORMAT_R8)
+	for y in range(height):
+		for x in range(width):
+			var col = thetas[0]
+			for layer in range(layers.size()):
+				col += layers[layer].get_pixel(x,y).r*thetas[layer+1]*50.
+			col = 1./(1. + exp(-col))
+			geolayer.set_pixel(x,y,Color(col,0,0,1))
+	return geolayer

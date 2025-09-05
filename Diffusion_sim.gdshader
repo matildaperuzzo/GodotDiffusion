@@ -30,7 +30,7 @@ void fragment() {
 	if (at_edge) {
 	    mapped_color.a = 0.0;
 	}
-	
+
 	ALPHA = mapped_color.a;
 	//RADIANCE = mapped_color;
 

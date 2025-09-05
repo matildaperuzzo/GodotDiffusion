@@ -13,3 +13,7 @@ config_version=5
 config/name="Diffusion"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/matil/OneDrive/Documents/Godot/Diffusion/Videos/n_av_100.avi"
