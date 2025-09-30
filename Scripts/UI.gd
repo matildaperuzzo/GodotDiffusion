@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const LAYERS = [
 	{"name": "average", "has_button": true},

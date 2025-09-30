@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://b68o83pphwqq2" path="res://Shaders/Diffusion_sim.gdshader" id="2_mgse6"]
 [ext_resource type="Shader" uid="uid://bslrfgi14nchs" path="res://Shaders/terrain_shader.gdshader" id="3_2c7a2"]
 [ext_resource type="Gradient" uid="uid://du8ftwp8xdctg" path="res://Assets/height_gradient.tres" id="4_dhvqw"]
-[ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://Scenes/UI.tscn" id="4_l2gng"]
+[ext_resource type="PackedScene" uid="uid://qbtymcj4qhoe" path="res://Scenes/UI.tscn" id="4_l2gng"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c7a2"]
 render_priority = 0

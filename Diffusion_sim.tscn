@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://c4bkqow7feagh"]
 
 [ext_resource type="Script" path="res://diffusion_sim.gd" id="1_5h4n1"]
-[ext_resource type="Shader" uid="uid://cab8f0bg8g4bh" path="res://Shaders/Diffusion_sim.gdshader" id="2_dhvqw"]
-[ext_resource type="Shader" uid="uid://d3i8pegqback8" path="res://Shaders/terrain_shader.gdshader" id="3_ufp7n"]
+[ext_resource type="Shader" uid="uid://b68o83pphwqq2" path="res://Shaders/Diffusion_sim.gdshader" id="2_dhvqw"]
+[ext_resource type="Shader" uid="uid://bslrfgi14nchs" path="res://Shaders/terrain_shader.gdshader" id="3_ufp7n"]
 [ext_resource type="Gradient" uid="uid://du8ftwp8xdctg" path="res://Assets/height_gradient.tres" id="4_dhvqw"]
-[ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://Scenes/UI.tscn" id="5_dhvqw"]
+[ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://Scenes/UI_2.tscn" id="5_dhvqw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c7a2"]
 render_priority = 0

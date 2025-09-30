@@ -1,37 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://qbtymcj4qhoe"]
+[gd_scene load_steps=5 format=3 uid="uid://bvwgfq1qrmpeu"]
 
 [ext_resource type="FontFile" uid="uid://ce1dmrvfg0pjj" path="res://Fonts/cmunbx.woff" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://d3btsmnasujgp" path="res://Scripts/UI.gd" id="2_nxvpl"]
 
-[sub_resource type="Theme" id="Theme_w371h"]
+[sub_resource type="Theme" id="Theme_3b2b5"]
 default_font = ExtResource("1_b3bc3")
 default_font_size = 20
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_nxvpl"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_g6l6n"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Ui" type="Node2D"]
 script = ExtResource("2_nxvpl")
 
 [node name="UI_Start" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1034.0
 offset_top = 548.0
-offset_right = -29.0
-offset_bottom = -59.0
+offset_right = 1131.0
+offset_bottom = 605.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_w371h")
+theme = SubResource("Theme_3b2b5")
 text = "START"
-icon = SubResource("CanvasTexture_nxvpl")
+icon = SubResource("CanvasTexture_g6l6n")
 
 [node name="UI_view_toggle" type="CheckButton" parent="."]
 offset_left = 1042.0
@@ -69,3 +62,7 @@ offset_right = 1141.0
 offset_bottom = 495.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="pressed" from="UI_Start" to="." method="_on_ui_start_pressed"]
+[connection signal="toggled" from="UI_view_toggle" to="." method="_on_ui_view_toggle_toggled"]
+[connection signal="value_changed" from="N_avUI/VSlider" to="." method="_on_v_slider_value_changed"]
