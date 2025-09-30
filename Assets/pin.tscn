@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8b3hs20lvqp3"]
+
+[ext_resource type="Material" uid="uid://33mrsmmgt6ct" path="res://Assets/pin.tres" id="1_d71a2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5k216"]
+material = ExtResource("1_d71a2")
+top_radius = 0.001
+bottom_radius = 0.001
+height = 0.1
+radial_segments = 16
+rings = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_vb3qe"]
+material = ExtResource("1_d71a2")
+radius = 0.005
+height = 0.01
+radial_segments = 5
+rings = 6
+
+[node name="Node3D" type="Node3D"]
+
+[node name="pin_body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999996, 0.00287979, 0, -0.00287979, 0.999996, 0, 0.05, 0)
+mesh = SubResource("CylinderMesh_5k216")
+
+[node name="pin_head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("SphereMesh_vb3qe")

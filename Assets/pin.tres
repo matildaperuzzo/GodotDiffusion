@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://33mrsmmgt6ct"]
+
+[ext_resource type="Shader" uid="uid://ddpd28ghdcqb" path="res://Assets/pin.gdshader" id="1_e8w8p"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_e8w8p")
+shader_parameter/color = Vector4(0.5, 0, 0.05, 0)

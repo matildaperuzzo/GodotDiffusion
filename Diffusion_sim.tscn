@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsmaywije6kdn"]
+[gd_scene load_steps=14 format=3 uid="uid://dsmaywije6kdn"]
 
 [ext_resource type="Script" uid="uid://cptbkb17prayg" path="res://diffusion_sim.gd" id="1_5h4n1"]
 [ext_resource type="Shader" uid="uid://t17vonjprmof" path="res://Diffusion_sim.gdshader" id="2_mgse6"]
 [ext_resource type="Shader" uid="uid://prob4wrt8otc" path="res://terrain_shader.gdshader" id="3_2c7a2"]
+[ext_resource type="Gradient" uid="uid://du8ftwp8xdctg" path="res://Assets/height_gradient.tres" id="4_dhvqw"]
 [ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://UI.tscn" id="4_l2gng"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c7a2"]
@@ -17,17 +18,22 @@ size = Vector2(1, 1)
 subdivide_width = 10
 subdivide_depth = 10
 
-[sub_resource type="Gradient" id="Gradient_2c7a2"]
-offsets = PackedFloat32Array(0.520732, 0.620068, 0.624577, 0.625705, 0.639233, 0.711387)
-colors = PackedColorArray(3.30899e-08, 0, 0.0585003, 1, 0.0136366, 0.0502903, 0.121288, 1, 0.108092, 0.068016, 0.0238037, 1, 0.0151596, 0.0386735, 0.00467087, 1, 0.0301218, 0.0140926, 0.00973136, 1, 0.0891317, 0.101506, 0.116294, 1)
+[sub_resource type="Gradient" id="Gradient_l2gng"]
+offsets = PackedFloat32Array(0, 0.518138, 1)
+colors = PackedColorArray(0.00233334, 0, 0.02, 1, 0.0787642, 0.00888469, 0.0105529, 1, 0.0236954, 0.0695147, 0.0276427, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l2gng"]
-gradient = SubResource("Gradient_2c7a2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dhvqw"]
+gradient = SubResource("Gradient_l2gng")
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y02cb"]
+gradient = ExtResource("4_dhvqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dhvqw"]
 render_priority = 0
 shader = ExtResource("3_2c7a2")
-shader_parameter/gradient = SubResource("GradientTexture1D_l2gng")
+shader_parameter/height_gradient = SubResource("GradientTexture1D_y02cb")
+shader_parameter/geo_gradient = SubResource("GradientTexture1D_dhvqw")
+shader_parameter/map_view = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ufp7n"]
 material = SubResource("ShaderMaterial_dhvqw")
@@ -54,7 +60,7 @@ mesh = SubResource("PlaneMesh_2c7a2")
 mesh = SubResource("PlaneMesh_ufp7n")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.299107, 0.95422, 0, -0.95422, 0.299107, 0.160744, 0.955637, 0.292874)
+transform = Transform3D(1, 0, 0, 0, 0.13274, 0.991151, 0, -0.991151, 0.13274, 0.156174, 0.834143, 0.0410056)
 fov = 86.3826
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

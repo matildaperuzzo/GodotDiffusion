@@ -7,6 +7,7 @@ uniform vec4 active_color;
 void vertex() {
 	float height_range = .2;
 	float h = texture(height_layer, UV).r;
+	h = clamp(h,0,1);
 	h = h * height_range;
 	VERTEX.y = h;
 	// Called for every vertex the material is visible on.
@@ -17,6 +18,7 @@ void fragment() {
 	color_val = clamp(color_val, 0.0, 1.0); // exaggerate range
 	vec4 mapped_color = mix(passive_color, active_color, color_val);
 	float height = texture(height_layer, UV).r;
+	height = clamp(height,0,1);
 	float height_scale = 0.2;
 	float shading_factor = (height) * height_scale;
 	ALBEDO = mapped_color.rgb + vec3(shading_factor);

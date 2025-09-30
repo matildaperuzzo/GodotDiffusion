@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d14qojrkwy4po"
-path="res://.godot/imported/heightmap.png-970e3209d663a6a812d7d74daf603f71.ctex"
+uid="uid://bvmhxa7rvuibw"
+path="res://.godot/imported/precipitation.png-b1f8c9853722e48ab3ba4baa343541cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Layers/heightmap.png"
-dest_files=["res://.godot/imported/heightmap.png-970e3209d663a6a812d7d74daf603f71.ctex"]
+source_file="res://Layers/precipitation.png"
+dest_files=["res://.godot/imported/precipitation.png-b1f8c9853722e48ab3ba4baa343541cb.ctex"]
 
 [params]
 

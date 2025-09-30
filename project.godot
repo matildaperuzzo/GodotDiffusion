@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="Diffusion"
+run/main_scene="uid://dsmaywije6kdn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor]
 
-movie_writer/movie_file="C:/Users/matil/OneDrive/Documents/Godot/Diffusion/Videos/n_av_100.avi"
+movie_writer/movie_file="C:/Users/mperuzzo/OneDrive - Nexus365/Documents/Diffusion_exports/Diffusion.avi"
+
+[rendering]
+
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
