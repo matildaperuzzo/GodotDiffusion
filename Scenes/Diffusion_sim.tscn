@@ -1,14 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4bkqow7feagh"]
+[gd_scene load_steps=14 format=3 uid="uid://dsmaywije6kdn"]
 
-[ext_resource type="Script" path="res://diffusion_sim.gd" id="1_5h4n1"]
-[ext_resource type="Shader" uid="uid://cab8f0bg8g4bh" path="res://Shaders/Diffusion_sim.gdshader" id="2_dhvqw"]
-[ext_resource type="Shader" uid="uid://d3i8pegqback8" path="res://Shaders/terrain_shader.gdshader" id="3_ufp7n"]
+[ext_resource type="Script" uid="uid://wh64c6bbd2wa" path="res://Scripts/diffusion_sim.gd" id="1_5h4n1"]
+[ext_resource type="Shader" uid="uid://b68o83pphwqq2" path="res://Shaders/Diffusion_sim.gdshader" id="2_mgse6"]
+[ext_resource type="Shader" uid="uid://bslrfgi14nchs" path="res://Shaders/terrain_shader.gdshader" id="3_2c7a2"]
 [ext_resource type="Gradient" uid="uid://du8ftwp8xdctg" path="res://Assets/height_gradient.tres" id="4_dhvqw"]
-[ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://Scenes/UI.tscn" id="5_dhvqw"]
+[ext_resource type="PackedScene" uid="uid://bvwgfq1qrmpeu" path="res://Scenes/UI.tscn" id="4_l2gng"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2c7a2"]
 render_priority = 0
-shader = ExtResource("2_dhvqw")
+shader = ExtResource("2_mgse6")
 shader_parameter/passive_color = Vector4(0, 0, 0, 0)
 shader_parameter/active_color = Vector4(0, 0, 0, 0)
 
@@ -30,7 +30,7 @@ gradient = ExtResource("4_dhvqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dhvqw"]
 render_priority = 0
-shader = ExtResource("3_ufp7n")
+shader = ExtResource("3_2c7a2")
 shader_parameter/height_gradient = SubResource("GradientTexture1D_y02cb")
 shader_parameter/geo_gradient = SubResource("GradientTexture1D_dhvqw")
 shader_parameter/map_view = false
@@ -71,4 +71,4 @@ omni_range = 23.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mgse6")
 
-[node name="Ui" parent="." instance=ExtResource("5_dhvqw")]
+[node name="Ui" parent="." instance=ExtResource("4_l2gng")]

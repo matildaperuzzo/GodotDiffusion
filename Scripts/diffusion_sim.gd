@@ -174,7 +174,7 @@ func _process(delta):
 	#print(SIM_SIZE)
 		
 func set_up_shader():
-	var shader_file := load("res://diffusion_sim.glsl")
+	var shader_file := load("res://ComputeShaders/diffusion_sim.glsl")
 	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
 	shader = rd.shader_create_from_spirv(shader_spirv)
 	geo_fmt = RDTextureFormat.new()
