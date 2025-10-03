@@ -34,6 +34,7 @@ text = "START"
 icon = SubResource("CanvasTexture_nxvpl")
 
 [node name="UI_view_toggle" type="CheckButton" parent="."]
+layout_mode = 0
 offset_left = 1042.0
 offset_top = 496.0
 offset_right = 1127.0
@@ -41,11 +42,13 @@ offset_bottom = 538.0
 text = "Map"
 
 [node name="LayersUI" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_top = 3.0
 offset_right = 1147.0
 offset_bottom = 91.0
 
 [node name="N_avUI" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 989.0
 offset_top = 134.0
 offset_right = 1132.0
@@ -63,6 +66,7 @@ min_value = 1.0
 value = 1.0
 
 [node name="Crops_container" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 1027.0
 offset_top = 232.0
 offset_right = 1141.0
